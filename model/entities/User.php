@@ -64,7 +64,8 @@ final class User extends Entity{
     }
 
     public function getDateRegistration(){
-       return $this->dateRegistration;
+        $date = $this->dateRegistration->format("d-m-Y à H:i");
+       return $date;
     }
 
     public function setEmail($email){
@@ -76,7 +77,7 @@ final class User extends Entity{
     }
 
     public function setDateRegistration($dateRegistration){
-        return $this->dateRegistration = $dateRegistration;
+        return $this->dateRegistration = new DateTime($dateRegistration);
     }
 
     public function __toString() {
