@@ -1,5 +1,6 @@
 <?php
     $posts = $result["data"]['posts'];
+    $topic = $result["data"]['topic'];
     
 ?>
 
@@ -12,4 +13,12 @@ foreach($posts as $post){  ?>
 <?php } }else
             {
                 echo "Il n'y a aucun post sur le sujet ! ";
-            } 
+            } ?>
+
+            <h2>Répondre</h2>
+            <br>
+            <form action="index.php?ctrl=forum&action=addPost" method="post">
+                <input type="hidden" name="topic_id" value="<?= $topic->getId()?>">
+                <textarea placeholder="Saisissez votre réponse" name="text" rows="4" cols="50" required style="text-align: center;"></textarea><br>
+                <button type="submit">Envoyer</button>
+            </form>

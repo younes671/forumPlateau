@@ -62,6 +62,48 @@ class ForumController extends AbstractController implements ControllerInterface{
     }
 
     
+// ajouter post à la discussion
 
+    public function addPost()
+    {
+        $postManager = new PostManager();
+
+        // methode de requete pour savoir comment la page a été accédée === on s'assure que c'est bien une méthode post
+        if($_SERVER['REQUEST_METHOD'] === 'POST')
+        {
+            // var_dump($_POST); exit;
+
+            $text = filter_input(INPUT_POST, 'text',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $topic = $_POST['topic_id']; // récupère l'id du topic qui vient du formulaire
+
+            // utilisation méthode add de Manager.php pour rajouter le nouveau post saisie
+            $postManager->add(["text" => $text, "topic_id" => $topic, "user_id" => $_SESSION['user']->getId()]);
+
+            // redirection vers la liste des posts
+            $this->redirectTo("forum", "listPostsByTopic", $topic);
+
+        }
+    }
+
+    public function addTopic()
+    {
+        $topicManager = new TopicManager();
+
+        if($_SERVER['REQUEST_METHOD'] === 'POST')
+        {
+            $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $category = $_POST['category_id'];
+
+            $topicManager->add(["title" => $title, "category_id" => $category, "user_id" => $_SESSION['user']->getId()]);
+
+            $this->redirectTo("forum", "listTopicsByCategory", $category);
+        }
+    }
+
+    public function deletePost()
+    {
+        $postManager = new PostManager();
+        $postManager->deleteById($id)
+    }
 
 }

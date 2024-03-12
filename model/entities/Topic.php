@@ -15,7 +15,7 @@ final class Topic extends Entity{
     private $user;
     private $category;
     private $dateCreation;
-    private $closed;
+    
 
     public function __construct($data){         
         $this->hydrate($data);        
@@ -75,6 +75,14 @@ final class Topic extends Entity{
     public function getDateCreation(){
         $date =  $this->dateCreation->format("d-m-Y à H:i");
         return $date;
+    }
+
+    public function getCategory(){
+        return $this->category;
+    }
+
+    public function setCategory($category){
+        return $this->category = $category;
     }
 
     public function setDateCreation($dateCreation){

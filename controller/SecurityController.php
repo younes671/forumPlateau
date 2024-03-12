@@ -22,6 +22,11 @@ class SecurityController extends AbstractController implements ControllerInterfa
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL);
             $pass1 = filter_input(INPUT_POST, 'pass1', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $pass2 = filter_input(INPUT_POST, 'pass2', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            // preg_match permet de rechercher des caractères dans une chaine longueur etc... regex
+            if (!preg_match("/^.{12,}$/", $pass1)) {
+                echo "Le mot de passe doit contenir au moins 12 caractères.";
+                $this->redirectTo("home","index");
+             }
 
             if($userName && $email && $pass1 && $pass2)
             {
@@ -76,7 +81,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
                 if($user)
                 {
                     $hash = $user->getMotDePasse();
-                    // vérification correspondance mot de passe  
+                    // vérification correspondance mot de passe   
                     if(password_verify($password, $hash))
                     {
 
@@ -97,6 +102,9 @@ class SecurityController extends AbstractController implements ControllerInterfa
             "meta_description" => "formulaire d'inscription",
         ];
     }
+
+
+
     public function logout () 
     {
         unset($_SESSION["user"]);

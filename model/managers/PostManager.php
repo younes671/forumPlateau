@@ -26,4 +26,9 @@ class PostManager extends Manager{
             $this->className
         );
     }
+
+    public function deleteById($id)
+    {
+        $this->delete($id);
+    }
 }
