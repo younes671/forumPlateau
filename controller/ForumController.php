@@ -167,7 +167,7 @@ class ForumController extends AbstractController implements ControllerInterface{
             
            
 
-            if($text)
+            if($text)      
             { 
                 $postInfo = [  
                     'id_post' => $id,
