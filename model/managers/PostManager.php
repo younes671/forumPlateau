@@ -29,6 +29,21 @@ class PostManager extends Manager{
 
     public function deleteById($id)
     {
-        $this->delete($id);
+        $sql = "DELETE FROM ". $this->tableName . " 
+                WHERE id_post = :id_post" ;
+        return DAO::delete($sql, ['id_post' => $id]);
+       
+    }
+
+    public function updatePost($array)
+    {
+        $sql = "UPDATE ". $this->tableName . " 
+                SET text = :text,
+                WHERE id_post = :id_post" ;
+        return DAO::update($sql, 
+        [  'id_post' => $array['id_post'], 
+            'text' => $array['text'],
+          ]);
+       
     }
 }

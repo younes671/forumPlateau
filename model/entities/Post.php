@@ -6,6 +6,7 @@ use DateTime;
 
 final class Post extends Entity
 {
+    private $id;
     private $text;
     private $dateCreation;
     private $topic;
@@ -13,6 +14,11 @@ final class Post extends Entity
 
     public function __construct($data){         
         $this->hydrate($data);        
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getText()
@@ -28,6 +34,11 @@ final class Post extends Entity
     public function getUser()
     {
         return $this->user;
+    }
+
+    public function setId($idPost)
+    {
+        return $this->id = $idPost;
     }
 
     public function setTopic($topic)

@@ -4,6 +4,7 @@ namespace Controller;
 use App\Session;
 use App\AbstractController;
 use App\ControllerInterface;
+use App\DAO;
 use Model\Managers\CategoryManager;
 use Model\Managers\PostManager;
 use Model\Managers\TopicManager;
@@ -100,10 +101,94 @@ class ForumController extends AbstractController implements ControllerInterface{
         }
     }
 
-    public function deletePost()
+    public function deletePostById($id)
     {
         $postManager = new PostManager();
-        $postManager->deleteById($id)
+        $postManager->deleteById($id);
+        // var_dump($postManager->deleteById($id)); exit;
+        $this->redirectTo("forum", "index");
+    }
+
+    public function deleteTopicById($id)
+    {
+        $topicManager = new TopicManager();
+        $topicManager->deleteTopic($id);
+        $this->redirectTo("forum", "index");
+    }
+
+    public function updateTopicById($id)
+    {
+        
+        $topicManager = new TopicManager();
+        $categoryManager = new CategoryManager();
+        $categories = $categoryManager->findAll();
+        $topic = $topicManager->findOneById($id);
+
+        if(isset($_POST['submit']))
+        {  
+            $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $category = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+           
+
+            if($title && $category)
+            {
+                $topicInfo = [  
+                    'id_topic' => $id,
+                    'title' => $title, 
+                    'category' => $category
+                ];
+
+                $topicManager->updateTopic($topicInfo);
+                $this->redirectTo("forum", "listTopicsByCategory", $topic->getCategory()->getId());
+            }
+
+        }
+        return [
+            "view" => VIEW_DIR."forum/editTopic.php",
+            "meta_description" => "formulaire de modification : " . $topic,
+            "data" => [
+                "topics" => $topic,
+                "categories" => $categories
+                
+            ]
+        ];
+
+    }
+
+    public function updatePostById($id)
+    {
+        
+        $postManager = new PostManager();
+        $post = $postManager->findOneById($id);
+
+        if(isset($_POST['submit']))
+        {  
+            $text = filter_input(INPUT_POST, 'text', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            
+           
+
+            if($text)
+            { 
+                $postInfo = [  
+                    'id_post' => $id,
+                    'text' => $text,
+                    'topic_id' => $post->getTopic()
+                ];
+                $postManager->updatePost($postInfo);
+                var_dump($postManager->updatePost($postInfo)); exit;
+                $this->redirectTo("forum", "listTopicByCategory", $post->getId());
+            }
+
+        }
+        return [
+            "view" => VIEW_DIR."forum/editPost.php",
+            "meta_description" => "formulaire de modification : " . $post,
+            "data" => [
+                "post" => $post,
+                
+            ]
+        ];
+
     }
 
 }

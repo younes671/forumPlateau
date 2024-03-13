@@ -73,7 +73,7 @@ final class Topic extends Entity{
     }
 
     public function getDateCreation(){
-        $date =  $this->dateCreation->format("d-m-Y à H:i");
+        $date =  $this->dateCreation->format("d-m-Y H:i");
         return $date;
     }
 

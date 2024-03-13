@@ -1,6 +1,7 @@
 <?php
 namespace Model\Managers;
 
+use Model\Entities\Topic;
 use App\Manager;
 use App\DAO;
 
@@ -26,5 +27,27 @@ class TopicManager extends Manager{
             DAO::select($sql, ['id' => $id]), 
             $this->className
         );
+    }
+
+    public function deleteTopic($id)
+    {
+        $sql = "DELETE FROM ". $this->tableName . " 
+                WHERE id_topic = :id_topic" ;
+        return DAO::delete($sql, ['id_topic' => $id]);
+       
+    }
+
+    public function updateTopic($array)
+    {
+        $sql = "UPDATE ". $this->tableName . " 
+                SET title = :title,
+                category_id = :category_id
+                WHERE id_topic = :id_topic" ;
+        return DAO::update($sql, [
+            'id_topic' => $array['id_topic'], 
+            'title' => $array['title'],
+            'category_id' => $array['category']
+        ]);
+       
     }
 }

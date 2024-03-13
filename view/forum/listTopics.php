@@ -8,6 +8,8 @@
 <?php
 foreach($topics as $topic ){ ?>
     <p><a href="index.php?ctrl=forum&action=listPostsByTopic&id=<?php echo $topic->getId() ?>"><?php echo $topic ?></a> publié par <?php echo $topic->getUser() ?> le <?php echo $topic->getDateCreation()?></p>
+    <p><a href="index.php?ctrl=forum&action=deleteTopicById&id=<?= $topic->getId() ?>">Supprimer</a></p>
+    <p><a href="index.php?ctrl=forum&action=updateTopicById&id=<?= $topic->getId() ?>">Modifier</a></p>
 <?php } ?>
 
 <h1>Ajouter un topic</h1>
@@ -15,9 +17,7 @@ foreach($topics as $topic ){ ?>
             <input type="hidden" id= category_id name="category_id" value="<?= $category->getId()?>">
             <label for="title">Titre</label><br>
             <input type="text" id="title" name="title" required><br>
-
-           
-            
-            <button type="submit">Créer le topic</button>
+            <textarea placeholder="Saisissez votre premier post" name="text" rows="4" cols="50" required style="text-align: center;"></textarea><br>
+                <button type="submit" name="submit">Créer le topic</button>
         </form>
 
