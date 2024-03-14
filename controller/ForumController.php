@@ -113,7 +113,7 @@ class ForumController extends AbstractController implements ControllerInterface{
     }
 
     public function deletePostById($id)
-    {
+    {   
         $postManager = new PostManager();
         $post = $postManager->findOneById($id); 
             if($post) // vérifie si post existe
@@ -125,7 +125,7 @@ class ForumController extends AbstractController implements ControllerInterface{
     }
 
     public function deleteTopicById($id)
-    {
+    { 
         $topicManager = new TopicManager();
         $topic = $topicManager->findOneById($id);
             if($topic) // vérifie si topic existe

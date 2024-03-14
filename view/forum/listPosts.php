@@ -11,7 +11,7 @@
     ?>
     
     <p><?php echo $post->getText() . " posté par " . $post->getUser() . " le : " . $post->getDateCreation()?></a></p>
-    <?php if($post->getUser()->getId() === App\Session::getUser()->getId()){ ?>
+    <?php if($post->getUser()->getId() === App\Session::getUser()->getId() || $_SESSION["user"]->hasRole('ROLE_ADMIN') === APP\Session::isAdmin()){ ?>
     <p><a href="index.php?ctrl=forum&action=deletePostById&id=<?= $post->getId() ?>">Supprimer</a></p>
     <p><a href="index.php?ctrl=forum&action=updatePostById&id=<?= $post->getId() ?>">Modifier</a></p>
     <?php } ?>

@@ -11,3 +11,7 @@
 h1 {
     color: rgb(0, 122, 156);
 }
+
+.header{
+    display: flex;
+}
