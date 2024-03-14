@@ -38,12 +38,24 @@ class PostManager extends Manager{
     public function updatePost($array)
     {
         $sql = "UPDATE ". $this->tableName . " 
-                SET text = :text,
+                SET text = :text
                 WHERE id_post = :id_post" ;
         return DAO::update($sql, 
         [  'id_post' => $array['id_post'], 
             'text' => $array['text'],
           ]);
+    }
+
+    public function listPostsByUser($id) {
+
+        $sql = "SELECT * 
+        FROM ".$this->tableName." 
+        WHERE user_id = :id";
        
+        return  $this->getMultipleResults(
+            DAO::select($sql, ['id' => $id]),
+            $this->className
+        );
+        
     }
 }

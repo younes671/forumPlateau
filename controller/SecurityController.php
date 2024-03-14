@@ -1,10 +1,12 @@
 <?php
 namespace Controller;
+session_start();
 
 use App\AbstractController;
 use App\DAO;
 use Model\Managers\UserManager;
-use Model\Entities\User;
+use Model\Managers\TopicManager;
+use Model\Managers\PostManager;
 use App\Session;
 use App\ControllerInterface;
 
@@ -114,5 +116,34 @@ class SecurityController extends AbstractController implements ControllerInterfa
             "meta_description" => "formulaire d'inscription",
         ];
 
+    }
+
+    public function lockTopic($id) {
+        //var_dump($id);die;
+        $topicManager = new TopicManager();
+        $topicManager->reqLockTopic($id);
+        $this->redirectTo("view", "home");
+    }
+
+    public function unlockTopic($id) {
+        $topicManager = new TopicManager();
+        $topicManager->reqUnlockTopic($id);
+        $this->redirectTo("view", "home");
+
+    }
+
+    public function profil($id){
+        $userManager = new UserManager();
+        $postManager = new PostManager();
+        $posts = $postManager->listPostsByUser($id);
+        $user = $userManager->findOneById($id);
+
+        return [
+            "view" => VIEW_DIR . "forum/profile.php",
+            "meta_description" => "page profil",
+            "data" => [
+                "user" => $user,
+                "posts" => $posts
+                ]];
     }
 }

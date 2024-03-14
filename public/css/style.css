@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+.wrapper{
+    height: 100vh;
+}
+
 h1 {
     color: rgb(0, 122, 156);
 }

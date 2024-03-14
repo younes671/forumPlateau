@@ -75,13 +75,13 @@ class ForumController extends AbstractController implements ControllerInterface{
             // var_dump($_POST); exit;
 
             $text = filter_input(INPUT_POST, 'text',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $topic = $_POST['topic_id']; // récupère l'id du topic qui vient du formulaire
+            $topic = filter_input(INPUT_POST, 'topic_id',FILTER_SANITIZE_NUMBER_INT); // récupère l'id du topic qui vient du formulaire
 
             // utilisation méthode add de Manager.php pour rajouter le nouveau post saisie
             $postManager->add(["text" => $text, "topic_id" => $topic, "user_id" => $_SESSION['user']->getId()]);
 
             // redirection vers la liste des posts
-            $this->redirectTo("forum", "listPostsByTopic", $topic);
+            $this->redirectTo("forum", "home", $topic);
 
         }
     }
@@ -93,10 +93,19 @@ class ForumController extends AbstractController implements ControllerInterface{
         if($_SERVER['REQUEST_METHOD'] === 'POST')
         {
             $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $text = filter_input(INPUT_POST, 'text',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $category = $_POST['category_id'];
 
-            $topicManager->add(["title" => $title, "category_id" => $category, "user_id" => $_SESSION['user']->getId()]);
+            $topic = $topicManager->add(["title" => $title, "category_id" => $category, "user_id" => $_SESSION['user']->getId()]);
 
+           
+
+            $postManager = new PostManager();
+
+            // utilisation méthode add de Manager.php pour rajouter le nouveau post saisie
+            $postManager->add(["text" => $text, "topic_id" => $topic, "user_id" => $_SESSION['user']->getId()]);
+
+            
             $this->redirectTo("forum", "listTopicsByCategory", $category);
         }
     }
@@ -175,7 +184,7 @@ class ForumController extends AbstractController implements ControllerInterface{
                     'topic_id' => $post->getTopic()
                 ];
                 $postManager->updatePost($postInfo);
-                var_dump($postManager->updatePost($postInfo)); exit;
+                // var_dump($postManager->updatePost($postInfo)); exit;
                 $this->redirectTo("forum", "listTopicByCategory", $post->getId());
             }
 

@@ -50,4 +50,17 @@ class TopicManager extends Manager{
         ]);
        
     }
+
+    public function reqLockTopic($id) {
+        $sql = "UPDATE {$this->tableName} SET closed = 1 WHERE id_topic = :id";
+       
+        DAO::update($sql, ['id' => $id]);
+
+    }
+    
+    public function reqUnlockTopic($id) {
+        $sql = "UPDATE {$this->tableName} SET closed = 0 WHERE id_topic = :id";
+        DAO::update($sql, ['id' => $id]);
+    }
+    
 }
