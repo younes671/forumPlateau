@@ -8,22 +8,22 @@
 <?php
 foreach($topics as $topic ){ ?>
         <p><a href="index.php?ctrl=forum&action=listPostsByTopic&id=<?php echo $topic->getId() ?>"><?php echo $topic ?></a> publié par <?php echo $topic->getUser() ?> le <?php echo $topic->getDateCreation()?></p>
-    <?php if($topic->getUser()->getId() === App\Session::getUser()->getId()){ ?>
+<?php if($topic->getUser()->getId() === App\Session::getUser()->getId()){ ?>
         <p><a href="index.php?ctrl=forum&action=deleteTopicById&id=<?= $topic->getId() ?>">Supprimer</a></p>
         <p><a href="index.php?ctrl=forum&action=updateTopicById&id=<?= $topic->getId() ?>">Modifier</a></p>
         <!-- si getClosed = 1 alors affiche déverrouiller sinon verrouiller  -->
-    <?php if($topic->getClosed())
+<?php if($topic->getClosed())
     { ?>
             <a href="index.php?ctrl=security&action=unlockTopic&id=<?= $topic->getId() ?>">Déverrouiller</a>
-    <?php } else
+<?php } else
     { ?>
             <a href="index.php?ctrl=security&action=lockTopic&id=<?= $topic->getId() ?>">Verrouiller</a>
-    <?php } ?>        
+<?php } ?>        
 <?php } } ?>
 
 <h1>Ajouter un topic</h1>
-        <form action="index.php?ctrl=forum&action=addTopic" method="post">
-            <input type="hidden" id= category_id name="category_id" value="<?= $category->getId()?>">
+        <form action="index.php?ctrl=forum&action=addTopic&id=<?= $category->getId() ?>" method="post">
+        
             <label for="title">Titre</label><br>
             <input type="text" id="title" name="title" required><br>
             <textarea placeholder="Saisissez votre premier post" name="text" rows="4" cols="50" required style="text-align: center;"></textarea><br>

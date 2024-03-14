@@ -22,8 +22,7 @@
 
             <h2>Répondre</h2>
             <?php if(!$topic->getClosed()){ ?>
-            <form action="index.php?ctrl=forum&action=addPost" method="post">
-            <input type="hidden" name="topic_id" value="<?= $topic->getId()?>">
+            <form action="index.php?ctrl=forum&action=addPost&id=<?= $topic->getId()?>" method="post">
                 <textarea placeholder="Saisissez votre réponse" name="text" rows="4" cols="50" required style="text-align: center;"></textarea><br>
                 <button type="submit" name="submit">Envoyer</button>
             </form>

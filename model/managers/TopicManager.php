@@ -29,13 +29,6 @@ class TopicManager extends Manager{
         );
     }
 
-    public function deleteTopic($id)
-    {
-        $sql = "DELETE FROM ". $this->tableName . " 
-                WHERE id_topic = :id_topic" ;
-        return DAO::delete($sql, ['id_topic' => $id]);
-       
-    }
 
     public function updateTopic($array)
     {

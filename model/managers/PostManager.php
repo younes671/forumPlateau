@@ -27,12 +27,11 @@ class PostManager extends Manager{
         );
     }
 
-    public function deleteById($id)
+    public function deletePostByTopic($id)
     {
-        $sql = "DELETE FROM ". $this->tableName . " 
-                WHERE id_post = :id_post" ;
-        return DAO::delete($sql, ['id_post' => $id]);
-       
+        $sql = "DELETE FROM ". $this->tableName . "
+                WHERE topic_id = :topic_id";
+        DAO::delete($sql, ['topic_id' => $id]);
     }
 
     public function updatePost($array)

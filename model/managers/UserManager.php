@@ -43,13 +43,7 @@ class UserManager extends Manager{
         );
     }
 
-    // crée un nouveau utilisateur
     
-    public function createUser($newUser)
-    {
-        return $this->add($newUser);
-    }
-
     public function findUserPassword($pass)
     {
         $sql = "SELECT * 

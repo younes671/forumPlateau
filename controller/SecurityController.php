@@ -1,6 +1,6 @@
 <?php
 namespace Controller;
-session_start();
+
 
 use App\AbstractController;
 use App\DAO;
@@ -44,10 +44,10 @@ class SecurityController extends AbstractController implements ControllerInterfa
                     {
                         
                         $hash = password_hash($pass1, PASSWORD_DEFAULT);
-                        $new = ['userName' => $userName, 'motDePasse' => $hash, 'email' => $email];
+                        $new = ['userName' => $userName, 'motDePasse' => $hash, 'email' => $email, 'role' => 'ROLE_USER'];
                         $userManager = new UserManager;
-                        $newUser = $userManager->createUser($new);
-                        
+                        $newUser = $userManager->add($new);
+                        $this->redirectTo("security", "login"); exit;
                     }else
                     {
                         echo "Une erreur est survenue ! ";

@@ -15,6 +15,7 @@ final class User extends Entity{
     private $email;
     private $motDePasse;
     private $dateRegistration;
+    private $role;
 
     public function __construct($data){         
         $this->hydrate($data);        
@@ -70,6 +71,14 @@ final class User extends Entity{
 
     public function setEmail($email){
         return $this->email = $email;
+    }
+
+    public function getRole(){
+        return $this->role;
+    }
+
+    public function setRole($role){
+        return $this->role = $role;
     }
 
     public function setMotDePasse($motDePasse){

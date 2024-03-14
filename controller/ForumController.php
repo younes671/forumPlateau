@@ -65,28 +65,28 @@ class ForumController extends AbstractController implements ControllerInterface{
     
 // ajouter post à la discussion
 
-    public function addPost()
+    public function addPost($id)
     {
         $postManager = new PostManager();
 
         // methode de requete pour savoir comment la page a été accédée === on s'assure que c'est bien une méthode post
         if($_SERVER['REQUEST_METHOD'] === 'POST')
         {
-            // var_dump($_POST); exit;
-
+            // récupère le post saisie
             $text = filter_input(INPUT_POST, 'text',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $topic = filter_input(INPUT_POST, 'topic_id',FILTER_SANITIZE_NUMBER_INT); // récupère l'id du topic qui vient du formulaire
+           
+         
 
             // utilisation méthode add de Manager.php pour rajouter le nouveau post saisie
-            $postManager->add(["text" => $text, "topic_id" => $topic, "user_id" => $_SESSION['user']->getId()]);
+            $postManager->add(["text" => $text, "topic_id" => $id, "user_id" => $_SESSION['user']->getId()]);
 
             // redirection vers la liste des posts
-            $this->redirectTo("forum", "home", $topic);
+            $this->redirectTo("forum", "listPostByTopic");
 
         }
     }
 
-    public function addTopic()
+    public function addTopic($id)
     {
         $topicManager = new TopicManager();
 
@@ -94,35 +94,48 @@ class ForumController extends AbstractController implements ControllerInterface{
         {
             $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $text = filter_input(INPUT_POST, 'text',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $category = $_POST['category_id'];
-
-            $topic = $topicManager->add(["title" => $title, "category_id" => $category, "user_id" => $_SESSION['user']->getId()]);
-
-           
-
-            $postManager = new PostManager();
-
-            // utilisation méthode add de Manager.php pour rajouter le nouveau post saisie
-            $postManager->add(["text" => $text, "topic_id" => $topic, "user_id" => $_SESSION['user']->getId()]);
-
             
-            $this->redirectTo("forum", "listTopicsByCategory", $category);
+            if($title && $text)
+            {
+                $topic = $topicManager->add(["title" => $title, "category_id" => $id, "closed" => 0, "user_id" => $_SESSION['user']->getId()]);
+    
+    
+                $postManager = new PostManager();
+    
+                // utilisation méthode add de Manager.php pour rajouter le nouveau post saisie
+                $postManager->add(["text" => $text, "topic_id" => $topic, "user_id" => $_SESSION['user']->getId()]);
+    
+                
+                $this->redirectTo("forum", "index");
+
+            }
         }
     }
 
     public function deletePostById($id)
     {
         $postManager = new PostManager();
-        $postManager->deleteById($id);
-        // var_dump($postManager->deleteById($id)); exit;
-        $this->redirectTo("forum", "index");
+        $post = $postManager->findOneById($id); 
+            if($post) // vérifie si post existe
+            {
+                $postManager = new PostManager();
+                $postManager->delete($id);
+                $this->redirectTo("forum", "index");
+            }
     }
 
     public function deleteTopicById($id)
     {
         $topicManager = new TopicManager();
-        $topicManager->deleteTopic($id);
-        $this->redirectTo("forum", "index");
+        $topic = $topicManager->findOneById($id);
+            if($topic) // vérifie si topic existe
+            {
+                $postManager = new PostManager();
+                $postManager->deletePostByTopic($id);
+                $topicManager = new TopicManager();
+                $topicManager->delete($id);
+                $this->redirectTo("forum", "index");
+            }
     }
 
     public function updateTopicById($id)
@@ -168,7 +181,7 @@ class ForumController extends AbstractController implements ControllerInterface{
     {
         
         $postManager = new PostManager();
-        $post = $postManager->findOneById($id);
+        $post = $postManager->findOneById($id); // récupère un post par son id
 
         if(isset($_POST['submit']))
         {  
