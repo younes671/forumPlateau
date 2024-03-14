@@ -1,17 +1,140 @@
-* {
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+* { 
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'inria Serif';
 }
 
-.wrapper{
-    height: 100vh;
+.body{
+    min-height: 100vh;
+   
 }
+
 
 h1 {
-    color: rgb(0, 122, 156);
+    color: black;
+    font-family: 'inria Serif';
+    padding: 10px;
 }
 
 .header{
-    display: flex;
+    margin: 0 320px;
 }
+
+.nav{
+    display: flex;
+    justify-content: space-between;
+    background-color: black;
+    height: 60px;
+}
+
+#nav-right{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+#nav-left{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.navbar{
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.navbar:hover {
+    color: rgb(229, 186, 105);
+}
+
+.lien-nav{
+    display: flex;
+    flex-direction: row;
+}
+
+.lien-nav:hover{
+    transform: skewY(2deg) skewX(15deg) scale(1.1);
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    flex-wrap: wrap;
+    background-color: rgb(222, 222, 222);
+    margin: 0 320px;
+    height: 300px;
+}
+
+footer{
+    display: flex;
+    background-color: black;
+    justify-content: center;
+    align-items: center;
+    margin: 0 320px;
+    height: 52px;
+}
+
+.reg{
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 10px;
+}
+
+.reg:hover{
+    color: rgb(229, 186, 105);
+}
+
+.footer:hover{
+    color: rgb(229, 186, 105);
+    transform: skewY(2deg) skewX(15deg) scale(1.1);
+}
+
+.home-connect{
+    color: rgb(29, 29, 29);
+    padding: 5px;
+}
+
+.div-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form{
+    background: #c7c7c7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    height: 200px;
+    width: 100%;
+}
+
+.btn{
+    background-color: #fff;
+  color: #777;
+}
+
+label{
+    color: #0e0e0e;
+    font-size: 15px;
+    font-family: 'inria Serif';
+}
+
+input{
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+}
+
+
+      
+        
+      

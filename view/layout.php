@@ -17,9 +17,9 @@
                 <h3 class="message" style="color: red"><?= App\Session::getFlash("error") ?></h3>
                 <h3 class="message" style="color: green"><?= App\Session::getFlash("success") ?></h3>
                 <header class="header">
-                    <nav>
+                    <nav class="nav">
                         <div id="nav-left">
-                            <a href="index.php">Accueil</a>
+                            <p class="lien-nav"><a class="navbar" href="index.php">Accueil</a></p>
                             <?php
                             if(App\Session::isAdmin()){
                                 ?>
@@ -31,18 +31,15 @@
                             // si l'utilisateur est connecté 
                             if(App\Session::getUser()){
                                 ?>
-                                <a href="index.php?ctrl=security&action=profil&id=<?= App\Session::getUser()->getId()?>"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()?></a>
-                                <a href="index.php?ctrl=security&action=logout">Déconnexion</a>
-                                <a href="index.php?ctrl=forum&action=index">Liste des catégories</a>
-                                <a href="index.php?ctrl=home&action=users">Liste des utilisateurs</a>
+                                <p class="lien-nav"><a class="navbar" href="index.php?ctrl=security&action=profil&id=<?= App\Session::getUser()->getId()?>"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()?></a></p>
+                                <p class="lien-nav"><a class="navbar" href="index.php?ctrl=security&action=logout">Déconnexion</a></p>
+                                <p class="lien-nav"><a class="navbar" href="index.php?ctrl=forum&action=index">Liste des catégories</a></p>                            
                                 <?php
                             }
                             else{
                                 ?>
-                                <a href="index.php?ctrl=security&action=login">Connexion</a>
-                                <a href="index.php?ctrl=security&action=register">Inscription</a>
-                                <a href="index.php?ctrl=forum&action=index">Liste des catégories</a>
-                                <a href="index.php?ctrl=home&action=users">Liste des utilisateurs</a>
+                                <p class="lien-nav"><a class="navbar" href="index.php?ctrl=security&action=login">Connexion</a></p>
+                                <p class="lien-nav"><a class="navbar" href="index.php?ctrl=security&action=register">Inscription</a></p>
                             <?php
                             }
                         ?>
@@ -55,7 +52,7 @@
                 </main>
             </div>
             <footer>
-                <p>&copy; <?= date_create("now")->format("Y") ?> - <a href="#">Règlement du forum</a> - <a href="#">Mentions légales</a></p>
+                <p class="reg">&copy; <?= date_create("now")->format("Y") ?></p> - <p class="footer"><a class="reg" href="#">Règlement du forum</a></p> - <p class="footer"><a class="reg" href="#">Mentions légales</a></p>
             </footer>
         </div>
         <script

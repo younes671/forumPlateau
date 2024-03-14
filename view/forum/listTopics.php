@@ -23,7 +23,9 @@ foreach($topics as $topic ){ ?>
       { ?>
             <a href="index.php?ctrl=security&action=lockTopic&id=<?= $topic->getId() ?>">Verrouiller</a>
 <?php } ?>        
-<?php  } } ?>
+<?php  }else{
+    echo "Veuillez vous connecter ou vous inscrire pour acceder au contenu";
+} } ?>
 
 <h1>Ajouter un topic</h1>
         <form action="index.php?ctrl=forum&action=addTopic&id=<?= $category->getId() ?>" method="post">
