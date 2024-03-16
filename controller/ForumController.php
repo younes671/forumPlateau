@@ -36,7 +36,8 @@ class ForumController extends AbstractController implements ControllerInterface{
         $category = $categoryManager->findOneById($id);
         $topics = $topicManager->findTopicsByCategory($id);
 
-        return [
+        
+        return [ 
             "view" => VIEW_DIR."forum/listTopics.php",
             "meta_description" => "Liste des topics par catégorie : ".$category,
             "data" => [
@@ -136,6 +137,32 @@ class ForumController extends AbstractController implements ControllerInterface{
                 $topicManager->delete($id);
                 $this->redirectTo("forum", "index");
             }
+    }
+
+    public function deleteUserById($id)
+    { 
+        $userManager = new UserManager();
+        $user = $userManager->findOneById($id);
+    
+        if($user) {
+            $postManager = new PostManager();
+            $topicManager = new TopicManager();
+    
+            // Mettre à jour les posts associés à l'utilisateur
+            $postManager->updatePostsUserId($id);
+    
+            // Mettre à jour les topics associés à l'utilisateur
+            $topicManager->updateTopicsUserId($id);
+
+            $postManager->anonymizePost($id);
+            // Anonymiser les topics associés à l'utilisateur
+            $topicManager->anonymizeTopic($id);
+    
+            // Enfin, supprimer l'utilisateur lui-même
+            $userManager->delete($id);
+            
+            $this->redirectTo("forum", "index");
+        }
     }
 
     public function updateTopicById($id)

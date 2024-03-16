@@ -15,25 +15,42 @@
 }
 
 #mainpage{
-    height: 92vh;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
+    margin-top: 40px;
+    margin-bottom: 20px;
 }
 
 h1 {
     color: black;
     font-family: 'inria Serif';
     padding: 10px;
-    text-shadow: 0 1px 1px rgba(251, 164, 2, 0.8);
+    /* text-shadow: 0 1px 1px rgba(251, 164, 2, 0.8); */
+}
+
+.style{
+    color: black;
+    font-size: 20px;
+    font-family: 'inria Serif';
+    padding: 10px;
+    /* text-shadow: 0 0 1px rgba(251, 164, 2, 0.5); */
 }
 
 .header{
-    margin: 0 320px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
 }
 
 .nav{
     display: flex;
     justify-content: space-between;
-    background-color: black;
-    height: 60px;
+    background-color: rgba(0, 0, 0, .9);
+    width: 100%;
 }
 
 #nav-right{
@@ -72,7 +89,7 @@ h1 {
 .lien-gestion2{
     font-size: 12px; 
     text-decoration: none;
-    color: rgb(99, 72, 20);
+    color: rgb(179, 33, 162);
  }
 
  .lien-gestion3{
@@ -81,8 +98,18 @@ h1 {
     color: blueviolet;
  }
 
+ .lien1{
+    display: flex;
+    justify-content: center;
+ }
+
  .lien{
     margin: 5px;
+ }
+
+ .l1{
+    display: flex;
+    justify-content: center;
  }
 
 
@@ -94,19 +121,25 @@ main{
     display: flex;
     flex-direction: column;
     align-content: space-around;
-    flex-wrap: wrap;
-    background-color: rgb(222, 222, 222);
+    flex-wrap: nowrap;
+    background-color: rgb(245, 245, 245);
     margin: 0 320px;
     height: 100%;
+    border-radius: 3px;
 }
 
+
+
 footer{
-    display: flex;
-    background-color: black;
-    justify-content: center;
-    align-items: center;
-    margin: 0 320px;
-    height: 53px;
+    position: fixed;
+    bottom: 0; /* Aligne le pied de page en bas de l'écran */
+    left: 0; /* Aligne le pied de page sur le côté gauche de l'écran */
+    width: 100%; /* Assure que le pied de page s'étende sur toute la largeur de l'écran */
+    height: 45px;
+    background-color: rgba(0, 0, 0, .9);
+    display: flex; /* Utiliser flexbox pour placer les éléments en ligne */
+    justify-content: center; /* Aligner les éléments horizontalement au centre */
+    align-items: center; 
 }
 
 .reg{
@@ -127,9 +160,15 @@ footer{
 
 .home-connect{
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     color: rgb(29, 29, 29);
     padding: 5px;
+}
+
+.date{
+    display: flex;
+    justify-content: center;
+    font-size: 11px;
 }
 
 .div-form{
@@ -271,12 +310,17 @@ label{
 .bienvenue{
     display: flex;
     justify-content: center;
-    text-shadow: 0 1px 1px rgba(251, 164, 2, 0.7);
+    /* text-shadow: 0 1px 1px rgba(251, 164, 2, 0.7); */
+}
+
+.titre-categorie{
+    text-decoration: underline;
 }
 
 .lien-topic{
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 
 .lien-list{
@@ -300,6 +344,13 @@ label{
 .auteur-topic{
     font-size: 10px;
     display: flex;
+    align-items: center;
+}
+
+.auteur-post{
+    font-size: 10px;
+    display: flex;
+    justify-content: center;
     align-items: center;
 }
 

@@ -27,10 +27,10 @@
                                 <p class="lien-nav"><a class="navbar" href="index.php?ctrl=security&action=login">Accueil</a></p>
                            <?php } ?>
                             <?php
-                            // if($_SESSION["user"]->hasRole('ROLE_ADMIN') === APP\Session::isAdmin()){
+                            if(App\Session::isAdmin()){
                                 ?>
-                                <p class="lien-nav"><a class="navbar" href="index.php?ctrl=home&action=users"></a></p>
-                            <?php //} ?>
+                                <p class="lien-nav"><a class="navbar" href="index.php?ctrl=home&action=users">Liste users</a></p>
+                            <?php } ?>
                         </div>
                         <div id="nav-right">
                         <?php

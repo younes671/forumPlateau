@@ -29,6 +29,18 @@ class TopicManager extends Manager{
         );
     }
 
+    public function updateTopicsUserId($userId)
+    {
+        $sql = "UPDATE ".$this->tableName." SET user_id = NULL WHERE user_id = :userId";
+        DAO::update($sql, ['userId' => $userId]);
+    }
+
+    public function anonymizeTopic($topicId)
+{
+    $sql = "UPDATE ".$this->tableName." SET author = 'Anonyme' WHERE id = :topicId";
+    DAO::update($sql, ['topicId' => $topicId]);
+}
+    
 
     public function updateTopic($array)
     {

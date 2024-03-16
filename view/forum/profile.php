@@ -5,22 +5,31 @@
     
     ?>
 
-    <h1> Profil de <?= $_SESSION["user"]->getUserName() ?></h1>
+    <h1 class="bienvenue" > Profil de <?= $_SESSION["user"]->getUserName() ?></h1>
             
 
-                <p>Pseudo : <?= $_SESSION["user"]->getUserName() ?></p>
+                <p class="home-connect">Pseudo : <?= $_SESSION["user"]->getUserName() ?></p>
                 
-                <p>Email : <?= $_SESSION["user"]->getEmail() ?></p>
+                <p class="home-connect">Email : <?= $_SESSION["user"]->getEmail() ?></p>
 
                 
           
     
         
-            <h1>Liste de vos posts</h1>
+            <h2 class="bienvenue">Liste de vos posts</h2>
           
-                    <?php foreach($posts as $post){  ?>
-                      <p> category : <?= $post->getTopic()?><p>
-                      <?= $post->getText()?>
-                     publié le : <?= $post->getDateCreation()?></li>
-                    <?php }?>
+                    <?php
+                    if($posts)
+                    {
+                        foreach($posts as $post)
+                        {  ?>
+                          <p class="home-connect style"> category : <?= $post->getTopic()?><p>
+                          <p class="home-connect"><?= $post->getText()?>
+                        publié le : <?= $post->getDateCreation()?></p>
+                        <?php }
+                    }else
+                    {
+                      echo "<p class='home-connect'>Vous n'avez participé à aucun Topic ! </p>";
+                    }
+
      

@@ -12,16 +12,19 @@
         <div class="block-post"><p class="text-post" ><?php echo $post->getText() . "</p><p class='auteur-post'>posté par " . $post->getUser() . " le : " . $post->getDateCreation()?></a></p></div>
 
     <!-- donne droit à l'admin de tout faire sur le site et donne droit à l'auteur de manipuler ses publications -->
-    
+<div class="lien-topic">
 <?php   if($post->getUser()->getId() === App\Session::getUser()->getId() || $_SESSION["user"]->hasRole('ROLE_ADMIN') === APP\Session::isAdmin()){ ?>
+    <div class="l1">
             <p class="lien"><a class="lien-gestion1" href="index.php?ctrl=forum&action=deletePostById&id=<?= $post->getId() ?>">Supprimer</a></p>
             <p class="lien"><a class="lien-gestion2" href="index.php?ctrl=forum&action=updatePostById&id=<?= $post->getId() ?>">Modifier</a></p>
 <?php } ?>
+</div> 
+</div> 
+
 <?php } }else
             {
                 echo "Il n'y a aucun post sur le sujet ! ";
             } ?>
-
             <h2 class="bienvenue" >Envoyer un message</h2>
         <?php if(!$topic->getClosed()){ ?>
             <form class="form" action="index.php?ctrl=forum&action=addPost&id=<?= $topic->getId()?>" method="post">

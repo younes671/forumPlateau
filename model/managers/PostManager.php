@@ -27,6 +27,18 @@ class PostManager extends Manager{
         );
     }
 
+    public function updatePostsUserId($userId)
+    {
+        $sql = "UPDATE ".$this->tableName." SET user_id = NULL WHERE user_id = :userId";
+        DAO::update($sql, ['userId' => $userId]);
+    }
+
+    public function anonymizePost($postId)
+    {
+    $sql = "UPDATE ".$this->tableName." SET author = 'Anonyme' WHERE id = :postId";
+    DAO::update($sql, ['postId' => $postId]);
+    }
+
     public function deletePostByTopic($id)
     {
         $sql = "DELETE FROM ". $this->tableName . "

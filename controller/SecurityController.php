@@ -108,10 +108,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
     {
         unset($_SESSION["user"]);
 
-        return [
-            "view" => VIEW_DIR."forum/login.php",
-            "meta_description" => "formulaire d'inscription",
-        ];
+        $this->redirectTo("security", "login");
 
     }
 
