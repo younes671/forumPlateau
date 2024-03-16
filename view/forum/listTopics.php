@@ -3,36 +3,37 @@
     $topics = $result["data"]['topics']; 
 ?>
 
-<h1>Liste des topics</h1>
+<h1 class="bienvenue" >Liste des topics</h1>
 
 <?php
 foreach($topics as $topic ){ ?>
-        <p><a href="index.php?ctrl=forum&action=listPostsByTopic&id=<?php echo $topic->getId() ?>"><?php echo $topic ?></a> publié par <?php echo $topic->getUser() ?> le <?php echo $topic->getDateCreation()?></p>
+        <div class="topic"><p class="lien-topic"><a class="lien-list lien-nav" href="index.php?ctrl=forum&action=listPostsByTopic&id=<?php echo $topic->getId() ?>"><h2><?php echo $topic ?></h2></a></p><p class="auteur-topic">publié par <?php echo $topic->getUser() ?> le <?php echo $topic->getDateCreation()?></p></div>
        
     <!-- donne droit à l'admin de tout faire sur le site et donne droit à l'auteur de manipuler ses publications -->
-
+<div class="lien-topic">
 <?php if($topic->getUser()->getId() === App\Session::getUser()->getId() || $_SESSION["user"]->hasRole('ROLE_ADMIN') === APP\Session::isAdmin())
         { ?>
-            <p><a href="index.php?ctrl=forum&action=deleteTopicById&id=<?= $topic->getId() ?>">Supprimer</a></p>
-            <p><a href="index.php?ctrl=forum&action=updateTopicById&id=<?= $topic->getId() ?>">Modifier</a></p>
+            <p class="lien"><a class="lien-gestion1" href="index.php?ctrl=forum&action=deleteTopicById&id=<?= $topic->getId() ?>">Supprimer</a></p>
+            <p class="lien"><a class="lien-gestion2" href="index.php?ctrl=forum&action=updateTopicById&id=<?= $topic->getId() ?>">Modifier</a></p>
             <!-- si getClosed = 1 alors affiche déverrouiller sinon verrouiller  -->
 <?php if($topic->getClosed())
       { ?>
-            <a href="index.php?ctrl=security&action=unlockTopic&id=<?= $topic->getId() ?>">Déverrouiller</a>
+            <p class="lien"><a class="lien-gestion3" href="index.php?ctrl=security&action=unlockTopic&id=<?= $topic->getId() ?>">Déverrouiller<i class="fa-solid fa-lock-open"></i></a></p>
 <?php } else
       { ?>
-            <a href="index.php?ctrl=security&action=lockTopic&id=<?= $topic->getId() ?>">Verrouiller</a>
-<?php } ?>        
-<?php  }else{
-    echo "Veuillez vous connecter ou vous inscrire pour acceder au contenu";
-} } ?>
+            <p class="lien"><a class="lien-gestion3" href="index.php?ctrl=security&action=lockTopic&id=<?= $topic->getId() ?>">Verrouiller<i class="fa-solid fa-lock"></i></a></p>
+<?php } ?>   
+</div>     
+<?php  }
+}  ?>
 
-<h1>Ajouter un topic</h1>
-        <form action="index.php?ctrl=forum&action=addTopic&id=<?= $category->getId() ?>" method="post">
+<h1 class="bienvenue" >Ajouter un topic</h1>
+        <form class="form" action="index.php?ctrl=forum&action=addTopic&id=<?= $category->getId() ?>" method="post">
         
-            <label for="title">Titre</label><br>
-            <input type="text" id="title" name="title" required><br>
-            <textarea placeholder="Saisissez votre premier post" name="text" rows="4" cols="50" required style="text-align: center;"></textarea><br>
-                <button type="submit" name="submit">Créer le topic</button>
+            
+            <input placeholder="Titre" class="input-titre" type="text" id="title" name="title" required>
+            <textarea class="textarea" placeholder="Saisissez votre premier post" name="text" rows="4" cols="50" required style="text-align: center" oninput="this.value = this.value.slice(0, this.getAttribute('maxlength'))" maxlength="500"></textarea>
+            <p>Caractères max : <span id="caracteres-restants">500</span></p>
+                <button class="btn" type="submit" name="submit">Créer le topic</button>
         </form>
 

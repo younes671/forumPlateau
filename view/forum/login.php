@@ -1,12 +1,12 @@
-<h1>Formulaire de connexion</h1>
+<h1 class="bienvenue">Connectez-vous</h1>
 
-<form action="#" method="post">
-    <label for="email">Email</label><br>
-    <input type="email" name="email" id="email"><br>
+<form class="form" action="#" method="post">
+    <label for="email">Email</label>
+    <input class="input" type="email" name="email" id="email">
 
-    <label for="password">Mot de passe</label><br>
-    <input type="password" name="password" id="password"><br>
+    <label for="password">Mot de passe</label>
+    <input class="input" type="password" name="password" id="password">
 
-    <input type="submit" name="submit" value="Se connecter">
+    <button class="btn" type="submit" name="submit">Se connecter</button>
 
 </form>

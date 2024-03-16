@@ -2,11 +2,13 @@
     $categories = $result["data"]['categories']; 
 ?>
 
-<h1>Liste des catégories</h1>
+<h1 class="bienvenue">BIENVENUE SUR LE FORUM</h1>
+
+<h2 class="bienvenue" >Liste des catégories</h2>
 
 <?php
 foreach($categories as $category ){ ?>
-    <p><a href="index.php?ctrl=forum&action=listTopicsByCategory&id=<?= $category->getId() ?>"><?= $category->getTitle() ?></a></p>
+    <p class="list"><a class="lien-list lien-nav" href="index.php?ctrl=forum&action=listTopicsByCategory&id=<?= $category->getId() ?>"><h3 class="bienvenue"><?= $category->getTitle() ?></h3></a></p>
 <?php }
 
 

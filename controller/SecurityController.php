@@ -90,10 +90,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
                         $session = new Session;
                         $user = $session->setUser($user);
                         // var_dump($user); exit;
-                        return [
-                            "view" => VIEW_DIR."home.php",
-                            "meta_description" => "page d'accueil",
-                        ];
+                        $this->redirectTo("forum", "index"); exit;
 
                     }
                 }
@@ -122,13 +119,13 @@ class SecurityController extends AbstractController implements ControllerInterfa
         //var_dump($id);die;
         $topicManager = new TopicManager();
         $topicManager->reqLockTopic($id);
-        $this->redirectTo("view", "home");
+        $this->redirectTo("forum", "index");
     }
 
     public function unlockTopic($id) {
         $topicManager = new TopicManager();
         $topicManager->reqUnlockTopic($id);
-        $this->redirectTo("view", "home");
+        $this->redirectTo("forum", "index");
 
     }
 

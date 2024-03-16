@@ -1,15 +1,13 @@
-<h1 class="bienvenue">BIENVENUE SUR LE FORUM</h1>
+<!-- <?php
+    $categories = $result["data"]['categories']; 
+?> -->
 
-<p class="home-connect">Veuillez vous connecter ou vous inscrire pour accéder au contenu !</p>
-<div class="div-form">
-    <form class="form" action="#" method="post">
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email">
-    
-        <label for="password">Mot de passe</label>
-        <input type="password" name="password" id="password">
-    
-        <input class="btn btn--white btn--animated" type="submit" name="submit" value="Se connecter">
-    
-    </form>
-</div>
+<!-- <h1 class="bienvenue">BIENVENUE SUR LE FORUM</h1> -->
+
+<!-- <h2 class="bienvenue" >Liste des catégories</h2> -->
+
+<?php
+// foreach($categories as $category ){ ?>
+    <!-- <p class="list"><a class="lien-list lien-nav" href="index.php?ctrl=forum&action=listTopicsByCategory&id=<?= $category->getId() ?>"><?= $category->getTitle() ?></a></p> -->
+<?php //}
+

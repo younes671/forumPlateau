@@ -19,12 +19,18 @@
                 <header class="header">
                     <nav class="nav">
                         <div id="nav-left">
-                            <p class="lien-nav"><a class="navbar" href="index.php">Accueil</a></p>
+                        <?php
+                        if(App\Session::getUser()){
+                            ?>
+                            <p class="lien-nav"><a class="navbar" href="index.php?ctrl=forum&action=index">Accueil</a></p>
+                            <?php }else{ ?>
+                                <p class="lien-nav"><a class="navbar" href="index.php?ctrl=security&action=login">Accueil</a></p>
+                           <?php } ?>
                             <?php
-                            if(App\Session::isAdmin()){
+                            // if($_SESSION["user"]->hasRole('ROLE_ADMIN') === APP\Session::isAdmin()){
                                 ?>
-                                <a href="index.php?ctrl=home&action=users"></a>
-                            <?php } ?>
+                                <p class="lien-nav"><a class="navbar" href="index.php?ctrl=home&action=users"></a></p>
+                            <?php //} ?>
                         </div>
                         <div id="nav-right">
                         <?php
@@ -32,13 +38,11 @@
                             if(App\Session::getUser()){
                                 ?>
                                 <p class="lien-nav"><a class="navbar" href="index.php?ctrl=security&action=profil&id=<?= App\Session::getUser()->getId()?>"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()?></a></p>
-                                <p class="lien-nav"><a class="navbar" href="index.php?ctrl=security&action=logout">Déconnexion</a></p>
-                                <p class="lien-nav"><a class="navbar" href="index.php?ctrl=forum&action=index">Liste des catégories</a></p>                            
+                                <p class="lien-nav"><a class="navbar" href="index.php?ctrl=security&action=logout">Déconnexion</a></p>                            
                                 <?php
                             }
                             else{
                                 ?>
-                                <p class="lien-nav"><a class="navbar" href="index.php?ctrl=security&action=login">Connexion</a></p>
                                 <p class="lien-nav"><a class="navbar" href="index.php?ctrl=security&action=register">Inscription</a></p>
                             <?php
                             }
@@ -51,10 +55,7 @@
                     <?= $page ?>
                 </main>
             </div>
-            <footer>
-                <p class="reg">&copy; <?= date_create("now")->format("Y") ?></p> - <p class="footer"><a class="reg" href="#">Règlement du forum</a></p> - <p class="footer"><a class="reg" href="#">Mentions légales</a></p>
-            </footer>
-        </div>
+              
         <script
             src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -89,5 +90,9 @@
             })
         </script>
         <script src="<?= PUBLIC_DIR ?>/js/script.js"></script>
+        <footer>
+                    <p class="reg">&copy; <?= date_create("now")->format("Y") ?></p> - <p class="footer"><a class="reg" href="#">Règlement du forum</a></p> - <p class="footer"><a class="reg" href="#">Mentions légales</a></p>
+                </footer>
+        </div>
     </body>
 </html>
