@@ -12,6 +12,9 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-image: url('../img/5883.jpg');
+    background-size: cover; /* pour que l'image couvre entièrement l'élément */
+    background-position: center;
 }
 
 #mainpage{
@@ -24,7 +27,7 @@
 }
 
 h1 {
-    color: black;
+    color: rgb(25, 187, 223);
     font-family: 'inria Serif';
     padding: 10px;
     /* text-shadow: 0 1px 1px rgba(251, 164, 2, 0.8); */
@@ -49,7 +52,7 @@ h1 {
 .nav{
     display: flex;
     justify-content: space-between;
-    background-color: rgba(0, 0, 0, .9);
+    background-color: rgba(0, 0, 0, .5);
     width: 100%;
 }
 
@@ -72,7 +75,7 @@ h1 {
 }
 
 .navbar:hover {
-    color: rgb(229, 186, 105);
+    color: rgb(25, 187, 223);
 }
 
 .lien-nav{
@@ -122,9 +125,10 @@ main{
     flex-direction: column;
     align-content: space-around;
     flex-wrap: nowrap;
-    background-color: rgb(245, 245, 245);
+    /* background-color: rgb(245, 245, 245); */
     margin: 0 320px;
     height: 100%;
+    /* border: solid rgb(229, 186, 105); */
     border-radius: 3px;
 }
 
@@ -136,7 +140,7 @@ footer{
     left: 0; /* Aligne le pied de page sur le côté gauche de l'écran */
     width: 100%; /* Assure que le pied de page s'étende sur toute la largeur de l'écran */
     height: 45px;
-    background-color: rgba(0, 0, 0, .9);
+    background-color: rgba(0, 0, 0, .5);
     display: flex; /* Utiliser flexbox pour placer les éléments en ligne */
     justify-content: center; /* Aligner les éléments horizontalement au centre */
     align-items: center; 
@@ -150,11 +154,11 @@ footer{
 }
 
 .reg:hover{
-    color: rgb(229, 186, 105);
+    color: rgb(25, 187, 223);
 }
 
 .footer:hover{
-    color: rgb(229, 186, 105);
+    color: rgb(25, 187, 223);
     transform: skewY(2deg) skewX(15deg) scale(1.1);
 }
 
@@ -221,9 +225,10 @@ footer{
 
 
 .btn{
-    background-color: #fff;
-    color: #000000;
+    background-color: rgba(25, 187, 223);
+    color: white;
     border-radius: 15px;
+    border: solid black;
     padding: 5px;
     margin: 10px;
     border: none;
@@ -248,7 +253,7 @@ footer{
 }
 
 .btn::after{
-    background-color:  rgb(255, 186, 58);
+    background-color:  rgb(25, 187, 223);
     content: '';
     display: inline-block;
     height: 100%;
@@ -282,9 +287,9 @@ label{
     padding: 5px;
     margin: 15px 5px;
     width: 80%;
-    outline-color: rgb(255, 186, 58);
-    border: none;
-
+    outline-color: rgb(25, 187, 223);
+    /* border: none; */
+    cursor: pointer;
 }
 
 .input-titre{
@@ -292,25 +297,26 @@ label{
     padding: 5px;
     margin: 15px 5px;
     width: 60%;
-    border: none;
-    outline-color: rgb(255, 186, 58);
-
+    /* border: none; */
+    outline-color: rgb(25, 187, 223);
+    cursor: pointer;
 }
 
 .textarea{
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 5px;
     text-decoration: none;
     resize: none;
     width: 80%;
-    border: none;
-    outline-color: rgb(255, 186, 58);
+    /* border: none; */
+    outline-color: rgb(25, 187, 223);
+    cursor: pointer;
 }
 
 .bienvenue{
     display: flex;
     justify-content: center;
-    /* text-shadow: 0 1px 1px rgba(251, 164, 2, 0.7); */
+    color: rgb(25, 187, 223);
 }
 
 .titre-categorie{
@@ -327,11 +333,12 @@ label{
     color:black;
     text-decoration: none;
     padding: 5px;
+    text-shadow: 0 1px 0 rgb(25, 187, 223, .7);
 }
 
 
 .lien-list:hover{
-    color: rgb(245, 177, 51);
+    color: rgb(25, 187, 223);
 }
 
 .topic{
@@ -354,28 +361,34 @@ label{
     align-items: center;
 }
 
+
 .text-post{
     display: flex;
     justify-content: center;
     padding: 15px;
+    border: solid rgba(0, 0, 0, .5);
     text-align: center;
-    background-color: rgb(182, 182, 182);
+    background-color: white;
     border-radius: 10px;
+    width: 80%;
     margin: 3px;
 }
 
 .auteur-post{
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .block-post{
     display: flex;
+    justify-content: center;
     flex-direction: column;
+    align-items: center;
 }
 
 
-@media screen and (max-width: 1025px){
+@media screen and (max-width: 1130px){
 
     .bienvenue{
         font-size: 25px;
@@ -427,9 +440,23 @@ label{
     }
 }
 
-@media screen and (max-width: 370px) {
+@media screen and (max-width: 480px) {
+    .btn{
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 380px) {
     .bienvenue{
         font-size: 20px;
+    }
+
+    .navbar{
+        font-size: 10px;
+    }
+
+    .btn{
+        font-size: 8px;
     }
 }
       

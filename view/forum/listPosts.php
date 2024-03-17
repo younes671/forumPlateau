@@ -23,7 +23,7 @@
 
 <?php } }else
             {
-                echo "Il n'y a aucun post sur le sujet ! ";
+                echo "<p class='bienvenue'>Il n'y a aucun post sur le sujet ! </p>";
             } ?>
             <h2 class="bienvenue" >Envoyer un message</h2>
         <?php if(!$topic->getClosed()){ ?>

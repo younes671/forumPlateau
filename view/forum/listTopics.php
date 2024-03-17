@@ -9,7 +9,7 @@
 if($topics)
 {
     foreach($topics as $topic ){ ?>
-            <div class="topic"><p class="lien-topic"><a class="lien-list lien-nav" href="index.php?ctrl=forum&action=listPostsByTopic&id=<?php echo $topic->getId() ?>"><h2 class="bienvenue"><?php echo $topic ?></h2></a></p><p class="auteur-topic">publié par <?php echo $topic->getUser() ?> le <?php echo $topic->getDateCreation()?></p></div>
+            <div class="topic"><i class="fa-solid fa-arrow-right"></i><p class="lien-topic"><a class="lien-list lien-nav" href="index.php?ctrl=forum&action=listPostsByTopic&id=<?php echo $topic->getId() ?>"><h2 class="bienvenue"><?php echo $topic ?></h2></a></p><p class="auteur-topic">publié par <?php echo $topic->getUser() ?> le <?php echo $topic->getDateCreation()?></p></div>
            
         <!-- donne droit à l'admin de tout faire sur le site et donne droit à l'auteur de manipuler ses publications -->
     <div class="lien-topic">
@@ -31,7 +31,7 @@ if($topics)
     }  
 }else
 {
-    echo "<h1 class='bienvenue'>Il n'y a aucun topic dans cette catégorie ! </h1>";
+    echo "<p class='bienvenue'>Il n'y a aucun topic dans cette catégorie ! </p>";
 } ?>
 
 <h1 class="bienvenue" >Ajouter un topic</h1>
