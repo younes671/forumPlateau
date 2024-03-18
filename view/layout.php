@@ -24,13 +24,13 @@
                             ?>
                             <p class="lien-nav"><a class="navbar" href="index.php?ctrl=forum&action=index">Accueil</a></p>
                             <?php }else{ ?>
-                                <p class="lien-nav"><a class="navbar" href="index.php?ctrl=security&action=login">Accueil</a></p>
+                                <p class="lien-nav"><a class="navbar" href="index.php">Accueil</a></p>
                            <?php } ?>
                             <?php
-                            if(App\Session::isAdmin()){
+                            if(App\Session::isAdmin()) : 
                                 ?>
                                 <p class="lien-nav"><a class="navbar" href="index.php?ctrl=home&action=users">Liste users</a></p>
-                            <?php } ?>
+                            <?php endif; ?>
                         </div>
                         <div id="nav-right">
                         <?php
@@ -44,6 +44,7 @@
                             else{
                                 ?>
                                 <p class="lien-nav"><a class="navbar" href="index.php?ctrl=security&action=register">Inscription</a></p>
+                                <p class="lien-nav"><a class="navbar" href="index.php?ctrl=security&action=login">Connexion</a></p>
                             <?php
                             }
                         ?>
@@ -91,7 +92,7 @@
         </script>
         <script src="<?= PUBLIC_DIR ?>/js/script.js"></script>
         <footer>
-                    <p class="reg">&copy; <?= date_create("now")->format("Y") ?></p> - <p class="footer"><a class="reg" href="#">Règlement du forum</a></p> - <p class="footer"><a class="reg" href="#">Mentions légales</a></p>
+                    <p class="reg">&copy; <?= date_create("now")->format("Y") ?></p> - <p class="footer"><a class="reg" href="index.php?ctrl=forum&action=reglement">Règlement du forum</a></p> - <p class="footer"><a class="reg" href="index.php?ctrl=forum&action=mention">Mentions légales</a></p>
                 </footer>
         </div>
     </body>

@@ -2,7 +2,7 @@
 
 <p class="home-connect">Veuillez remplir tous les champs pour vous inscrire </p>
 
-<div class="div-form">
+<!-- <div class="div-form"> -->
 <form class="form-inscription" action="#" method="post">
     <label for="userName">User Name</label>
     <input class="input" type="text" name="userName" id="userName">
@@ -19,4 +19,4 @@
     <button class="btn"  type="submit" name="submit">S'inscrire</button>
 
 </form>
-</div>
+<!-- </div> -->

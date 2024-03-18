@@ -3,7 +3,10 @@
     $posts = $result["data"]['posts']; 
     $user = $result["data"]['user']; 
     
-    ?>
+    
+
+        if(App\Session::getUser())
+        { ?>
 
     <h1 class="bienvenue" > Profil de <?= $_SESSION["user"]->getUserName() ?></h1>
             
@@ -31,5 +34,10 @@
                     {
                       echo "<p class='home-connect'>Vous n'avez participé à aucun Topic ! </p>";
                     }
+                  
+        }else
+        {
+            header('location: index.php');
+        }
 
      

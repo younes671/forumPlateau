@@ -29,6 +29,23 @@ class ForumController extends AbstractController implements ControllerInterface{
         ];
     }
 
+    public function listAccueil() {
+        
+        // créer une nouvelle instance de CategoryManager
+        $categoryManager = new CategoryManager();
+        // récupérer la liste de toutes les catégories grâce à la méthode findAll de Manager.php (triés par nom)
+        $categories = $categoryManager->findAll(["title", "DESC"]);
+
+        // le controller communique avec la vue "listCategories" (view) pour lui envoyer la liste des catégories (data)
+        return [
+            "view" => VIEW_DIR."home.php",
+            "meta_description" => "Liste des catégories du forum pour l'accueil",
+            "data" => [
+                "categorys" => $categories
+            ]
+        ];
+    }
+
     public function listTopicsByCategory($id) {
 
         $topicManager = new TopicManager();
@@ -46,6 +63,7 @@ class ForumController extends AbstractController implements ControllerInterface{
             ]
         ];
     }
+
 
     public function listPostsByTopic($id)
     {
@@ -82,7 +100,7 @@ class ForumController extends AbstractController implements ControllerInterface{
             $postManager->add(["text" => $text, "topic_id" => $id, "user_id" => $_SESSION['user']->getId()]);
 
             // redirection vers la liste des posts
-            $this->redirectTo("forum", "listPostByTopic");
+            $this->redirectTo("forum", "listPostByTopic", $id);
 
         }
     }
@@ -107,7 +125,7 @@ class ForumController extends AbstractController implements ControllerInterface{
                 $postManager->add(["text" => $text, "topic_id" => $topic, "user_id" => $_SESSION['user']->getId()]);
     
                 
-                $this->redirectTo("forum", "index");
+                $this->redirectTo("forum", "listTopicsByCategory", $id);
 
             }
         }
@@ -121,7 +139,7 @@ class ForumController extends AbstractController implements ControllerInterface{
             {
                 $postManager = new PostManager();
                 $postManager->delete($id);
-                $this->redirectTo("forum", "index");
+                $this->redirectTo("forum", "listPostsByTopic");
             }
     }
 
@@ -135,7 +153,7 @@ class ForumController extends AbstractController implements ControllerInterface{
                 $postManager->deletePostByTopic($id);
                 $topicManager = new TopicManager();
                 $topicManager->delete($id);
-                $this->redirectTo("forum", "index");
+                $this->redirectTo("forum", "listTopicsByCategory");
             }
     }
 
@@ -238,6 +256,22 @@ class ForumController extends AbstractController implements ControllerInterface{
             ]
         ];
 
+    }
+
+    public function reglement()
+    {
+        return [
+            "view" => VIEW_DIR."forum/reglement.php",
+            "meta_description" => "règlement du site"
+        ];
+    }
+
+    public function mention()
+    {
+        return [
+            "view" => VIEW_DIR."forum/mentionLegale.php",
+            "meta_description" => "règlement du site"
+        ];
     }
 
 }
