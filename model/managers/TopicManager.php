@@ -36,10 +36,10 @@ class TopicManager extends Manager{
     }
 
     public function anonymizeTopic($topicId)
-{
+    {
     $sql = "UPDATE ".$this->tableName." SET author = 'Anonyme' WHERE id = :topicId";
     DAO::update($sql, ['topicId' => $topicId]);
-}
+    }
     
 
     public function updateTopic($array)
@@ -67,5 +67,4 @@ class TopicManager extends Manager{
         $sql = "UPDATE {$this->tableName} SET closed = 0 WHERE id_topic = :id";
         DAO::update($sql, ['id' => $id]);
     }
-    
 }

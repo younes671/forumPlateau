@@ -15,7 +15,7 @@ if(!App\Session::getUser())
 }else
     {   
        
-        if($topic){
+        if($topic){ 
                 foreach($posts as $post){ 
                 ?>
                     <div class="block-post"><p class="text-post" ><?php echo $post->getText() . "</p><p class='auteur-post'>posté par " . $post->getUser() . " le : " . $post->getDateCreation()?></a></p></div>

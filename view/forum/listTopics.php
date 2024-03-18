@@ -11,10 +11,10 @@
             header('location: index.php'); 
         }else
             {
-                if(!empty($category))
+                if($category)
                 {
 
-                    if($topics)
+                    if($category)
                     {
                         foreach($topics as $topic ){ ?>
                                 <div class="topic"></i><p class="lien-topic"><a class="lien-list lien-nav" href="index.php?ctrl=forum&action=listPostsByTopic&id=<?php echo $topic->getId() ?>"><h2 class="bienvenue"><?php echo $topic ?></h2></a></p><p class="auteur-topic">publié par <?php echo $topic->getUser() ?> le <?php echo $topic->getDateCreation()?></p></div>

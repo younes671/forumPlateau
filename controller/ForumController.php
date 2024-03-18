@@ -100,7 +100,7 @@ class ForumController extends AbstractController implements ControllerInterface{
             $postManager->add(["text" => $text, "topic_id" => $id, "user_id" => $_SESSION['user']->getId()]);
 
             // redirection vers la liste des posts
-            $this->redirectTo("forum", "listPostByTopic", $id);
+            $this->redirectTo("forum", "listPostsByTopic", $id);
 
         }
     }
@@ -134,26 +134,37 @@ class ForumController extends AbstractController implements ControllerInterface{
     public function deletePostById($id)
     {   
         $postManager = new PostManager();
-        $post = $postManager->findOneById($id); 
+        $post = $postManager->findOneById($id);
+        $topicManager = new TopicManager();
+        $topic = $topicManager->findOneById($id);
+       
+       
+
             if($post) // vérifie si post existe
             {
-                $postManager = new PostManager();
+                
+                
+               
+                var_dump($topic); exit;
                 $postManager->delete($id);
-                $this->redirectTo("forum", "listPostsByTopic", $id);
             }
+            $this->redirectTo("forum", "listPostsByTopic", $post);
+            
     }
 
     public function deleteTopicById($id)
     { 
         $topicManager = new TopicManager();
         $topic = $topicManager->findOneById($id);
+        $categoryManager = new CategoryManager();
+        $category = $categoryManager->findOneById($id);
             if($topic) // vérifie si topic existe
             {
                 $postManager = new PostManager();
                 $postManager->deletePostByTopic($id);
                 $topicManager = new TopicManager();
                 $topicManager->delete($id);
-                $this->redirectTo("forum", "listTopicsByCategory");
+                $this->redirectTo("forum", "listTopicsByCategory", $category);
             }
     }
 
