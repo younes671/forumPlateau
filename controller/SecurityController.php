@@ -90,7 +90,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
                         $session = new Session;
                         $user = $session->setUser($user);
                         // var_dump($user); exit;
-                        $this->redirectTo("forum", "index"); exit;
+                        $this->redirectTo("category", "index"); exit;
 
                     }
                 }
@@ -112,36 +112,20 @@ class SecurityController extends AbstractController implements ControllerInterfa
 
     }
 
-    public function lockTopic($id) {
-        //var_dump($id);die;
-        $topicManager = new TopicManager();
-        $topic = $topicManager->findOneById($id);
-        $topicId = $topic->getCategory()->getId();
-        $topicManager->reqLockTopic($id);
-        $this->redirectTo("forum", "listTopicsByCategory", $topicId);
-    }
-
-    public function unlockTopic($id) {
-        $topicManager = new TopicManager();
-        $topic = $topicManager->findOneById($id);
-        $topicId = $topic->getCategory()->getId();
-        $topicManager->reqUnlockTopic($id);
-        $this->redirectTo("forum", "listTopicsByCategory", $topicId);
-
-    }
-
-    public function profil($id){
-        $userManager = new UserManager();
-        $postManager = new PostManager();
-        $posts = $postManager->listPostsByUser($id);
-        $user = $userManager->findOneById($id);
-
+    
+    public function reglement()
+    {
         return [
-            "view" => VIEW_DIR . "forum/profile.php",
-            "meta_description" => "page profil",
-            "data" => [
-                "user" => $user,
-                "posts" => $posts
-                ]];
+            "view" => VIEW_DIR."forum/reglement.php",
+            "meta_description" => "règlement du site"
+        ];
+    }
+
+    public function mention()
+    {
+        return [
+            "view" => VIEW_DIR."forum/mentionLegale.php",
+            "meta_description" => "règlement du site"
+        ];
     }
 }

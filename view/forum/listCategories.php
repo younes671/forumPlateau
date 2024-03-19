@@ -10,7 +10,7 @@
 if(App\Session::getUser())
 {
     foreach($categories as $category ){ ?>
-        <p class="list"><a class="lien-list" href="index.php?ctrl=forum&action=listTopicsByCategory&id=<?= $category->getId() ?>"><h3 class="bienvenue"><?= $category->getTitle() ?></h3></a></p>
+        <p class="list"><a class="lien-list" href="index.php?ctrl=topic&action=listTopicsByCategory&id=<?= $category->getId() ?>"><h3 class="bienvenue"><?= $category->getTitle() ?></h3></a></p>
     <?php }
 
 }else

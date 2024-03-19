@@ -13,7 +13,7 @@
             <p class="home-connect style"><?= $user->getUserName() . " inscrit le : <p class='date'>" . $user->getDateRegistration()?></a></p></p>
             <?php if($_SESSION["user"]->hasRole('ROLE_ADMIN') === APP\Session::isAdmin())
                 { ?> 
-                    <p class="lien1"><a class="lien-gestion1" href="index.php?ctrl=forum&action=deleteUserById&id=<?= $user->getId() ?>">Supprimer</a></p>
+                    <p class="lien1"><a class="lien-gestion1" href="index.php?ctrl=user&action=deleteUserById&id=<?= $user->getId() ?>">Supprimer</a></p>
         <?php } 
         } 
         }else

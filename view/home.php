@@ -10,7 +10,7 @@
 if($categories)
 {
 foreach($categories as $category ){ ?>
-    <p class="list"><a class="lien-list lien-nav" href="index.php?ctrl=forum&action=listTopicsByCategory&id=<?= $category->getId() ?>"><?= $category->getTitle() ?></a></p>
+    <p class="list"><a class="lien-list lien-nav" href="index.php?ctrl=topic&action=listTopicsByCategory&id=<?= $category->getId() ?>"><?= $category->getTitle() ?></a></p>
     <?php }
 }else
 {

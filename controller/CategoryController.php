@@ -2,16 +2,11 @@
 namespace Controller;
 
 use App\ControllerInterface;
-use App\Session;
 use App\AbstractController;
-use App\DAO;
 use Model\Managers\CategoryManager;
-use Model\Managers\PostManager;
-use Model\Managers\TopicManager;
-use Model\Managers\UserManager;
 
-class CategoryController extends AbstractController implements ControllerInterface 
-{
+
+class CategoryController extends AbstractController implements ControllerInterface{
     public function index() {
         
         // créer une nouvelle instance de CategoryManager

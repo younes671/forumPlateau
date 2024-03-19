@@ -22,7 +22,7 @@
                         <?php
                         if(App\Session::getUser()){
                             ?>
-                            <p class="lien-nav"><a class="navbar" href="index.php?ctrl=forum&action=index">Accueil</a></p>
+                            <p class="lien-nav"><a class="navbar" href="index.php?ctrl=category&action=index">Accueil</a></p>
                             <?php }else{ ?>
                                 <p class="lien-nav"><a class="navbar" href="index.php">Accueil</a></p>
                            <?php } ?>
@@ -37,7 +37,7 @@
                             // si l'utilisateur est connecté 
                             if(App\Session::getUser()){
                                 ?>
-                                <p class="lien-nav"><a class="navbar" href="index.php?ctrl=security&action=profil"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()?></a></p>
+                                <p class="lien-nav"><a class="navbar" href="index.php?ctrl=user&action=profil"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()?></a></p>
                                 <p class="lien-nav"><a class="navbar" href="index.php?ctrl=security&action=logout">Déconnexion</a></p>                            
                                 <?php
                             }
@@ -92,7 +92,7 @@
         </script>
         <script src="<?= PUBLIC_DIR ?>/js/script.js"></script>
         <footer>
-                    <p class="reg1">&copy; <?= date_create("now")->format("Y") ?></p>   <p class="footer"><a class="reg" href="index.php?ctrl=forum&action=reglement">Règlement du forum</a></p>   <p class="footer"><a class="reg" href="index.php?ctrl=forum&action=mention">Mentions légales</a></p>
+                    <p class="reg1">&copy; <?= date_create("now")->format("Y") ?></p>   <p class="footer"><a class="reg" href="index.php?ctrl=security&action=reglement">Règlement du forum</a></p>   <p class="footer"><a class="reg" href="index.php?ctrl=security&action=mention">Mentions légales</a></p>
                 </footer>
         </div>
     </body>
