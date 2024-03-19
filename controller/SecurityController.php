@@ -25,7 +25,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
             $pass1 = filter_input(INPUT_POST, 'pass1', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $pass2 = filter_input(INPUT_POST, 'pass2', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             // preg_match permet de rechercher des caractères dans une chaine longueur etc... regex
-            if (!preg_match("/^(?=.*[!@#$%^&*()-_+=[{\]};:<>|./?])(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{12,}$/", $pass1)){
+            if (!preg_match("/^(?=.*[!@#$%^&*()\[\]{};:<>|.\/?])(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{12,}$/", $pass1)){
                 echo "Le mot de passe doit contenir au moins un caractère spécial, une majuscule, une minuscule, un chiffre et avoir une longueur d'au moins 12 caractères.";
                 $this->redirectTo("security","register");
              }
