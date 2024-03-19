@@ -20,7 +20,8 @@ class TopicManager extends Manager{
 
         $sql = "SELECT * 
                 FROM ".$this->tableName." t 
-                WHERE t.category_id = :id";
+                WHERE t.category_id = :id
+                ORDER BY dateCreation DESC";
        
         // la requête renvoie plusieurs enregistrements --> getMultipleResults
         return  $this->getMultipleResults(
@@ -57,14 +58,14 @@ class TopicManager extends Manager{
     }
 
     public function reqLockTopic($id) {
-        $sql = "UPDATE {$this->tableName} SET closed = 1 WHERE id_topic = :id";
+        $sql = "UPDATE ".$this->tableName." SET closed = 1 WHERE id_topic = :id";
        
         DAO::update($sql, ['id' => $id]);
 
     }
     
     public function reqUnlockTopic($id) {
-        $sql = "UPDATE {$this->tableName} SET closed = 0 WHERE id_topic = :id";
+        $sql = "UPDATE ".$this->tableName." SET closed = 0 WHERE id_topic = :id";
         DAO::update($sql, ['id' => $id]);
     }
 }

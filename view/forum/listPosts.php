@@ -15,14 +15,14 @@ if(!App\Session::getUser())
 }else
     {   
        
-        if($topic){ 
+        if($posts){ 
                 foreach($posts as $post){ 
                 ?>
                     <div class="block-post"><p class="text-post" ><?php echo $post->getText() . "</p><p class='auteur-post'>posté par " . $post->getUser() . " le : " . $post->getDateCreation()?></a></p></div>
     
                 <!-- donne droit à l'admin de tout faire sur le site et donne droit à l'auteur de manipuler ses publications -->
             <div class="lien-topic">
-            <?php   if($post->getUser()->getId() === App\Session::getUser()->getId() || $_SESSION["user"]->hasRole('ROLE_ADMIN') === APP\Session::isAdmin()){ ?>
+            <?php   if($post->getUser()->getId() === App\Session::getUser()->getId() || $topic->getUser()->getId() === APP\Session::isAdmin()){ ?>
                 <div class="l1">
                         <p class="lien"><a class="lien-gestion1" href="index.php?ctrl=forum&action=deletePostById&id=<?= $post->getId() ?>">Supprimer</a></p>
                         <p class="lien"><a class="lien-gestion2" href="index.php?ctrl=forum&action=updatePostById&id=<?= $post->getId() ?>">Modifier</a></p>
@@ -34,6 +34,10 @@ if(!App\Session::getUser())
                         {
                             echo "<p class='bienvenue'>Il n'y a aucun post sur le sujet ! </p>";
                         } ?>
+                        <div class="l1">
+                            <p class="lien"><a class="lien-gestion2" href="index.php?ctrl=forum&action=listTopicsByCategory&id=<?= $topic->getCategory()->getId() ?>">Revenir à la liste</a></p>
+                        </div>
+
                         <h2 class="bienvenue" >Envoyer un message</h2>
                     <?php if(!$topic->getClosed()){ ?>
                         <form class="form" action="index.php?ctrl=forum&action=addPost&id=<?= $topic->getId()?>" method="post">
@@ -45,6 +49,9 @@ if(!App\Session::getUser())
                             echo "Le sujet est clos !";
                         }
         }     
+    }else
+    {
+        echo "<h1 class='bienvenue'>Le post spécifié n'existe pas ! </h1>";
     }
 
 

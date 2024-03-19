@@ -163,6 +163,7 @@ class ForumController extends AbstractController implements ControllerInterface{
             }
     }
 
+
     public function deleteUserById($id)
     { 
         $userManager = new UserManager();

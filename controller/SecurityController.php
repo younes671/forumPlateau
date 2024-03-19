@@ -115,14 +115,18 @@ class SecurityController extends AbstractController implements ControllerInterfa
     public function lockTopic($id) {
         //var_dump($id);die;
         $topicManager = new TopicManager();
+        $topic = $topicManager->findOneById($id);
+        $topicId = $topic->getCategory()->getId();
         $topicManager->reqLockTopic($id);
-        $this->redirectTo("forum", "index");
+        $this->redirectTo("forum", "listTopicsByCategory", $topicId);
     }
 
     public function unlockTopic($id) {
         $topicManager = new TopicManager();
+        $topic = $topicManager->findOneById($id);
+        $topicId = $topic->getCategory()->getId();
         $topicManager->reqUnlockTopic($id);
-        $this->redirectTo("forum", "index");
+        $this->redirectTo("forum", "listTopicsByCategory", $topicId);
 
     }
 

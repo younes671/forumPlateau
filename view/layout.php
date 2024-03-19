@@ -92,7 +92,7 @@
         </script>
         <script src="<?= PUBLIC_DIR ?>/js/script.js"></script>
         <footer>
-                    <p class="reg">&copy; <?= date_create("now")->format("Y") ?></p> - <p class="footer"><a class="reg" href="index.php?ctrl=forum&action=reglement">Règlement du forum</a></p> - <p class="footer"><a class="reg" href="index.php?ctrl=forum&action=mention">Mentions légales</a></p>
+                    <p class="reg1">&copy; <?= date_create("now")->format("Y") ?></p>   <p class="footer"><a class="reg" href="index.php?ctrl=forum&action=reglement">Règlement du forum</a></p>   <p class="footer"><a class="reg" href="index.php?ctrl=forum&action=mention">Mentions légales</a></p>
                 </footer>
         </div>
     </body>
