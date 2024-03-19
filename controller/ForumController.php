@@ -135,27 +135,22 @@ class ForumController extends AbstractController implements ControllerInterface{
     {   
         $postManager = new PostManager();
         $post = $postManager->findOneById($id);
-        $topicManager = new TopicManager();
-        $topic = $topicManager->findOneById($id);
+        $topic = $post->getTopic()->getId();
        
-       
-
             if($post) // vérifie si post existe
             {
-                
-                
-               
-                var_dump($topic); exit;
+                // var_dump($topic); exit;
                 $postManager->delete($id);
             }
-            $this->redirectTo("forum", "listPostsByTopic", $post);
-            
+            $this->redirectTo("forum", "listPostsByTopic", $topic);        
     }
+
 
     public function deleteTopicById($id)
     { 
         $topicManager = new TopicManager();
         $topic = $topicManager->findOneById($id);
+        $categoryId = $topic->getCategory()->getId();
         $categoryManager = new CategoryManager();
         $category = $categoryManager->findOneById($id);
             if($topic) // vérifie si topic existe
@@ -164,7 +159,7 @@ class ForumController extends AbstractController implements ControllerInterface{
                 $postManager->deletePostByTopic($id);
                 $topicManager = new TopicManager();
                 $topicManager->delete($id);
-                $this->redirectTo("forum", "listTopicsByCategory", $category);
+                $this->redirectTo("forum", "listTopicsByCategory", $categoryId);
             }
     }
 
