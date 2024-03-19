@@ -3,7 +3,8 @@
     $topics = $result["data"]['topics'];
 ?>
 
-<h1 class="bienvenue" >Liste des topics</h1>
+<h1 class="bienvenue" >Catégorie : <?= $category->getTitle();?></h1>
+<h2 class="bienvenue">Liste des topics </h2>
 
 <?php
         if(!App\Session::getUser())
@@ -14,7 +15,7 @@
                 if($category)
                 {
 
-                    if($category)
+                    if($topics)
                     {
                         foreach($topics as $topic ){ ?>
                                 <div class="topic"></i><p class="lien-topic"><a class="lien-list" href="index.php?ctrl=forum&action=listPostsByTopic&id=<?php echo $topic->getId() ?>"><h2 class="bienvenue"><?php echo $topic ?></h2></a></p><p class="auteur-topic">publié par <?php echo $topic->getUser() ?> le <?php echo $topic->getDateCreation()?></p></div>

@@ -117,10 +117,6 @@ h1 {
  }
 
 
-.lien-nav:hover{
-    transform: skewY(2deg) skewX(15deg) scale(1.1);
-}
-
 main{
     display: flex;
     flex-direction: column;
@@ -164,9 +160,19 @@ footer{
     color: rgb(25, 187, 223);
 }
 
+.l2{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 .home-connect{
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
     color: rgb(29, 29, 29);
     padding: 5px;
 }
@@ -324,6 +330,9 @@ label{
 }
 
 .lien-list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color:black;
     text-decoration: none;
     padding: 5px;
@@ -399,25 +408,25 @@ label{
     }
 
     main{
-        margin: 0 220px;
+        margin: 0 ;
     }
 
     footer{
-        margin: 0 220px;
+        margin: 0 ;
     }
 
     .header{
-        margin: 0 220px;
+        margin: 0 ;
     }
 }
 
 @media screen and (max-width: 950px){
     main{
-        margin: 0 120px;
+        margin: 0 ;
     }
 
     footer{
-        margin: 0 120px;
+        margin: 0;
     }
     .navbar{
         font-size: 10px;
@@ -425,7 +434,7 @@ label{
 
 
     .header{
-        margin: 0 120px;
+        margin: 0;
     }
 }
 

@@ -1,50 +1,5 @@
-<?php
-namespace Controller;
 
-use App\Session;
-use App\AbstractController;
-use App\ControllerInterface;
-use App\DAO;
-use Model\Managers\CategoryManager;
-use Model\Managers\PostManager;
-use Model\Managers\TopicManager;
-use Model\Managers\UserManager;
-
-class ForumController extends AbstractController implements ControllerInterface{
-
-    public function index() {
-        
-        // créer une nouvelle instance de CategoryManager
-        $categoryManager = new CategoryManager();
-        // récupérer la liste de toutes les catégories grâce à la méthode findAll de Manager.php (triés par nom)
-        $categories = $categoryManager->findAll(["title", "DESC"]);
-
-        // le controller communique avec la vue "listCategories" (view) pour lui envoyer la liste des catégories (data)
-        return [
-            "view" => VIEW_DIR."forum/listCategories.php",
-            "meta_description" => "Liste des catégories du forum",
-            "data" => [
-                "categories" => $categories
-            ]
-        ];
-    }
-
-    public function listAccueil() {
-        
-        // créer une nouvelle instance de CategoryManager
-        $categoryManager = new CategoryManager();
-        // récupérer la liste de toutes les catégories grâce à la méthode findAll de Manager.php (triés par nom)
-        $categories = $categoryManager->findAll(["title", "DESC"]);
-
-        // le controller communique avec la vue "listCategories" (view) pour lui envoyer la liste des catégories (data)
-        return [
-            "view" => VIEW_DIR."home.php",
-            "meta_description" => "Liste des catégories du forum pour l'accueil",
-            "data" => [
-                "categorys" => $categories
-            ]
-        ];
-    }
+   
 
     public function listTopicsByCategory($id) {
 
@@ -94,14 +49,14 @@ class ForumController extends AbstractController implements ControllerInterface{
             // récupère le post saisie
             $text = filter_input(INPUT_POST, 'text',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
            
-         
-
-            // utilisation méthode add de Manager.php pour rajouter le nouveau post saisie
-            $postManager->add(["text" => $text, "topic_id" => $id, "user_id" => $_SESSION['user']->getId()]);
-
-            // redirection vers la liste des posts
-            $this->redirectTo("forum", "listPostsByTopic", $id);
-
+            if($text)
+            {
+                // utilisation méthode add de Manager.php pour rajouter le nouveau post saisie
+                $postManager->add(["text" => $text, "topic_id" => $id, "user_id" => $_SESSION['user']->getId()]);
+        
+                // redirection vers la liste des posts
+                $this->redirectTo("forum", "listPostsByTopic", $id);
+            }
         }
     }
 
@@ -133,6 +88,8 @@ class ForumController extends AbstractController implements ControllerInterface{
 
     public function deletePostById($id)
     {   
+        if(Session::getUser()->getId() || Session::isAdmin())
+        {
         $postManager = new PostManager();
         $post = $postManager->findOneById($id);
         $topic = $post->getTopic()->getId();
@@ -144,28 +101,39 @@ class ForumController extends AbstractController implements ControllerInterface{
             }
             $this->redirectTo("forum", "listPostsByTopic", $topic);        
     }
+    }
 
 
     public function deleteTopicById($id)
     { 
-        $topicManager = new TopicManager();
-        $topic = $topicManager->findOneById($id);
-        $categoryId = $topic->getCategory()->getId();
-        $categoryManager = new CategoryManager();
-        $category = $categoryManager->findOneById($id);
-            if($topic) // vérifie si topic existe
+       
+            $topicManager = new TopicManager();
+            $topic = $topicManager->findOneById($id);
+            $categoryId = $topic->getCategory()->getId();
+            $categoryManager = new CategoryManager();
+            $category = $categoryManager->findOneById($id);
+            if(Session::getUser()->getId() || Session::isAdmin())
             {
-                $postManager = new PostManager();
-                $postManager->deletePostByTopic($id);
-                $topicManager = new TopicManager();
-                $topicManager->delete($id);
-                $this->redirectTo("forum", "listTopicsByCategory", $categoryId);
+                if($topic) // vérifie si topic existe
+                {
+                    $postManager = new PostManager();
+                    $postManager->deletePostByTopic($id);
+                    $topicManager = new TopicManager();
+                    $topicManager->delete($id);
+                    $this->redirectTo("forum", "listTopicsByCategory", $categoryId);
+                }
+            }else
+            {
+                echo "Vous n'etes pas autorisé à y accéder ! ";
             }
-    }
+        }
+
 
 
     public function deleteUserById($id)
     { 
+        if(Session::isAdmin())
+        {
         $userManager = new UserManager();
         $user = $userManager->findOneById($id);
     
@@ -178,10 +146,6 @@ class ForumController extends AbstractController implements ControllerInterface{
     
             // Mettre à jour les topics associés à l'utilisateur
             $topicManager->updateTopicsUserId($id);
-
-            $postManager->anonymizePost($id);
-            // Anonymiser les topics associés à l'utilisateur
-            $topicManager->anonymizeTopic($id);
     
             // Enfin, supprimer l'utilisateur lui-même
             $userManager->delete($id);
@@ -189,10 +153,12 @@ class ForumController extends AbstractController implements ControllerInterface{
             $this->redirectTo("forum", "index");
         }
     }
+    }
 
     public function updateTopicById($id)
     {
-        
+        if(Session::getUser()->getId() || Session::isAdmin())
+        {
         $topicManager = new TopicManager();
         $categoryManager = new CategoryManager();
         $categories = $categoryManager->findAll();
@@ -228,10 +194,12 @@ class ForumController extends AbstractController implements ControllerInterface{
         ];
 
     }
+    }
 
     public function updatePostById($id)
     {
-        
+        if(Session::getUser()->getId() || Session::isAdmin())
+        {
         $postManager = new PostManager();
         $post = $postManager->findOneById($id); // récupère un post par son id
 
@@ -250,19 +218,20 @@ class ForumController extends AbstractController implements ControllerInterface{
                 ];
                 $postManager->updatePost($postInfo);
                 // var_dump($postManager->updatePost($postInfo)); exit;
-                $this->redirectTo("forum", "listTopicByCategory", $post->getId());
+                $this->redirectTo("forum", "listPostsByTopic", $post->getTopic()->getId());
             }
 
-        }
-        return [
-            "view" => VIEW_DIR."forum/editPost.php",
-            "meta_description" => "formulaire de modification : " . $post,
-            "data" => [
-                "post" => $post,
-                
-            ]
-        ];
+            }
+            return [
+                "view" => VIEW_DIR."forum/editPost.php",
+                "meta_description" => "formulaire de modification : " . $post,
+                "data" => [
+                    "post" => $post,
+                    
+                ]
+            ];
 
+        }
     }
 
     public function reglement()

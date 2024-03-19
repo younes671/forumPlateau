@@ -26,11 +26,13 @@
                     {
                         foreach($posts as $post)
                         {  ?>
-                          <p class="home-connect style"> category : <?= $post->getTopic()?><p>
-                          <p class="home-connect"><?= $post->getText()?>
-                        publié le : <?= $post->getDateCreation()?></p>
+                          <p class="home-connect">categorie : <a class="lien-list" href="index.php?ctrl=forum&action=listPostsByTopic&id=<?= $post->getTopic()->getId()?>"><?= $post->getTopic()?></a></p>
+                        <div class="l2">
+                          <p class="home-connect">Message : </p><p class="home-connect"><?= $post->getText()?></p><p class="home-connect"> publié le : <?= $post->getDateCreation()?></p>
+                        </div>
                         <?php }
                     }else
+
                     {
                       echo "<p class='home-connect'>Vous n'avez participé à aucun Topic ! </p>";
                     }
