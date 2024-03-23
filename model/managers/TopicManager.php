@@ -30,19 +30,15 @@ class TopicManager extends Manager{
         );
     }
 
+    // permet de mettre àjour un topic par l'id utilisateur
     public function updateTopicsUserId($userId)
     {
         $sql = "UPDATE ".$this->tableName." SET user_id = NULL WHERE user_id = :userId";
         DAO::update($sql, ['userId' => $userId]);
     }
-
-    public function anonymizeTopic($topicId)
-    {
-    $sql = "UPDATE ".$this->tableName." SET author = 'Anonyme' WHERE id = :topicId";
-    DAO::update($sql, ['topicId' => $topicId]);
-    }
     
 
+    // permet de mettre à jour un topic
     public function updateTopic($array)
     {
         $sql = "UPDATE ". $this->tableName . " 
@@ -57,6 +53,7 @@ class TopicManager extends Manager{
        
     }
 
+    // permet de verrouiller un topic
     public function reqLockTopic($id) {
         $sql = "UPDATE ".$this->tableName." SET closed = 1 WHERE id_topic = :id";
        
@@ -64,6 +61,7 @@ class TopicManager extends Manager{
 
     }
     
+    // permet de déverrouiller un topic
     public function reqUnlockTopic($id) {
         $sql = "UPDATE ".$this->tableName." SET closed = 0 WHERE id_topic = :id";
         DAO::update($sql, ['id' => $id]);

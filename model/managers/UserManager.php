@@ -14,6 +14,7 @@ class UserManager extends Manager{
         parent::connect();
     }
 
+    // permet de récupérer la liste des utilisateurs par id
     public function findUserById($id) {
 
         $sql = "SELECT * 
@@ -31,6 +32,7 @@ class UserManager extends Manager{
 
     // méthode finduserbyemail retourne l'email de l'utilisateur
 
+    // permet de récupérer la liste des utilisateurs par email
     public function findUserByEmail($email)
     {
         $sql = "SELECT * 
@@ -43,7 +45,7 @@ class UserManager extends Manager{
         );
     }
 
-    
+    // permet de récupérer le mot de passe utilisateur
     public function findUserPassword($pass)
     {
         $sql = "SELECT * 

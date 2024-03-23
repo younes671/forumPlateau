@@ -17,6 +17,8 @@ class PostController extends AbstractController implements ControllerInterface
         
     }
 
+    // permet de récupérer la liste des post par topic
+
     public function listPostsByTopic($id)
     {
         $topicManager = new TopicManager();
@@ -56,6 +58,8 @@ class PostController extends AbstractController implements ControllerInterface
         }
     }
 
+    // permet de supprimer post par id
+
     public function deletePostById($id)
     {   
         if(Session::getUser()->getId() || Session::isAdmin())
@@ -72,6 +76,8 @@ class PostController extends AbstractController implements ControllerInterface
             $this->redirectTo("post", "listPostsByTopic", $topic);        
     }
     }
+
+    // permet de mettre à jour un post
 
     public function updatePostById($id)
     {

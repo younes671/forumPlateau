@@ -14,6 +14,8 @@ class PostManager extends Manager{
         parent::connect();
     }
 
+    // permet de récupérer la liste des posts par topic
+
     public function findPostsByTopic($id) {
 
         $sql = "SELECT *
@@ -28,17 +30,14 @@ class PostManager extends Manager{
         );
     }
 
+    // permet de mettre à jour un post par l'id utilisateur
     public function updatePostsUserId($userId)
     {
         $sql = "UPDATE ".$this->tableName." SET user_id = NULL WHERE user_id = :userId";
         DAO::update($sql, ['userId' => $userId]);
     }
 
-    public function anonymizePost($postId)
-    {
-    $sql = "UPDATE ".$this->tableName." SET author = 'Anonyme' WHERE id = :postId";
-    DAO::update($sql, ['postId' => $postId]);
-    }
+    // permet de supprimer un post
 
     public function deletePostByTopic($id)
     {
@@ -47,6 +46,7 @@ class PostManager extends Manager{
         DAO::delete($sql, ['topic_id' => $id]);
     }
 
+    // permet de mettre à jour un post
     public function updatePost($array)
     {
         $sql = "UPDATE ". $this->tableName . " 
@@ -58,6 +58,7 @@ class PostManager extends Manager{
           ]);
     }
 
+    // permet de récupérer la liste des post par utilisateur
     public function listPostsByUser($id) {
 
         $sql = "SELECT * 

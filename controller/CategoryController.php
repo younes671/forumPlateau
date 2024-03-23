@@ -24,6 +24,8 @@ class CategoryController extends AbstractController implements ControllerInterfa
         ];
     }
 
+    // permet de récupérer la liste des categories
+
     public function listAccueil() {
         
         // créer une nouvelle instance de CategoryManager

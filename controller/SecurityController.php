@@ -15,11 +15,14 @@ class SecurityController extends AbstractController implements ControllerInterfa
 
     public function index() {}
 
+    // méthode pour l'inscription
+
     public function register ($id) {
         if(isset($_POST['submit']))
         {
             DAO::connect();
 
+            // filtre les données saisie 
             $userName = filter_input(INPUT_POST, 'userName', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL);
             $pass1 = filter_input(INPUT_POST, 'pass1', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -30,6 +33,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
                 $this->redirectTo("security","register");
              }
 
+             // vérification données reçu via formulaire si filtre ok
             if($userName && $email && $pass1 && $pass2)
             {
                 $userManager = new UserManager;
@@ -64,6 +68,8 @@ class SecurityController extends AbstractController implements ControllerInterfa
             "meta_description" => "formulaire d'inscription",
         ];
     }
+
+    // méthode pour la connexion
     public function login () 
     {
         if(isset($_POST['submit']))
@@ -102,7 +108,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
         ];
     }
 
-
+    // méthode pour la deconnexion
 
     public function logout () 
     {
@@ -112,6 +118,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
 
     }
 
+    // affiche reglement du forum
     
     public function reglement()
     {
@@ -120,6 +127,8 @@ class SecurityController extends AbstractController implements ControllerInterfa
             "meta_description" => "règlement du site"
         ];
     }
+
+    // affiche les mentions légale
 
     public function mention()
     {

@@ -17,6 +17,7 @@ class TopicController extends AbstractController implements ControllerInterface
             
         }
 
+    // permet de récupérer la liste des topics par categories
         public function listTopicsByCategory($id) {
 
             $topicManager = new TopicManager();
@@ -35,6 +36,7 @@ class TopicController extends AbstractController implements ControllerInterface
             ];
         }
 
+        // ajoute topic
         public function addTopic($id)
         {
             $topicManager = new TopicManager();
@@ -61,6 +63,7 @@ class TopicController extends AbstractController implements ControllerInterface
             }
         }
 
+        // supprime topic
         public function deleteTopicById($id)
         { 
            
@@ -85,6 +88,7 @@ class TopicController extends AbstractController implements ControllerInterface
                 }
             }
 
+            // met à jour topic
             public function updateTopicById($id)
             {
                 if(Session::getUser()->getId() || Session::isAdmin())
@@ -126,6 +130,7 @@ class TopicController extends AbstractController implements ControllerInterface
             }
         }
 
+        // verrouille topic
         public function lockTopic($id) {
             //var_dump($id);die;
             $topicManager = new TopicManager();
@@ -135,6 +140,7 @@ class TopicController extends AbstractController implements ControllerInterface
             $this->redirectTo("topic", "listTopicsByCategory", $topicId);
         }
     
+        // déverrouille topic
         public function unlockTopic($id) {
             $topicManager = new TopicManager();
             $topic = $topicManager->findOneById($id);

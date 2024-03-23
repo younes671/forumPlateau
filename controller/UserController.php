@@ -17,6 +17,7 @@ class UserController extends AbstractController implements ControllerInterface
         
     }
 
+    // supprime utilisateur
     public function deleteUserById($id)
     { 
         if(Session::isAdmin())
@@ -42,6 +43,7 @@ class UserController extends AbstractController implements ControllerInterface
     }
     }
 
+    // affiche profil utilisateur
     public function profil($id){
         $userManager = new UserManager();
         $postManager = new PostManager();
